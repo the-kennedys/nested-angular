@@ -1,0 +1,45 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <script src="angular.min.js"></script>
+    <script src="callbuilder.js"></script>
+    <script type="text/ng-template" id="screening">
+      <div ng-controller="ScreeningCtrl">
+      <h3>Screening template</h3>
+      <label>name</label><input type="text"
+      ng-model="block.name"></input>
+      Current value: {{block.name}}
+      <li ng-repeat="number in block.numbers">
+        {{number}}
+      </li>
+      <form ng-submit="addNumber(block)">
+        <input type="text" ng-model="newNumber"  size="30"
+               placeholder="add new number here">
+        <input class="btn-primary" type="submit" value="add">
+      </form>
+      </div>
+    </script>
+    <script type="text/ng-template" id="standard-routing">
+      <h3>Standard Routing</h3>
+      {{block.name}}
+    </script>
+
+  </head>
+  <body>
+    <div ng-controller="CallbuilderCtrl">
+      <div ng-repeat="block in blocks">
+        {{block.type}}
+        <div ng-switch on="block.type">
+          <div ng-switch-when="screening">
+            Sc
+            <div ng-include src="'screening'"></div>
+          </div>
+          <div ng-switch-when="standard-routing">
+            Sr
+            <div ng-include src="'standard-routing'"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
